@@ -20,7 +20,7 @@ namespace Entities
         public override double Withdraw(double Amount)
         {
             Random rnd = new Random();
-            int years = rnd.Next(20); 
+            int years = rnd.Next(5); 
             int months = 12 * years;
 
             Console.WriteLine("You are attempting to withdraw $" + Amount + " from your Term Deposit.\n");
@@ -36,7 +36,7 @@ namespace Entities
                 Balance = InterestRate * months * Amount;
                 Console.WriteLine("You have successfully accumulated $" + Balance + ".\n");
 
-                Console.WriteLine("How much would you like to withdraw?");
+                
                 var TermBal = Console.ReadLine();
                 int result = Int32.Parse(TermBal);
 

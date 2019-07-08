@@ -11,7 +11,7 @@ namespace Entities
         {
             Balance += Amount;
 
-            Console.WriteLine("You have transferred $" + Amount + " into your Account.\nYou now have a balance of $" + Balance + ".\n");
+            Console.WriteLine("You have transferred $" + Amount + " into your Account.\n");
             return Balance;
         }
 
@@ -20,7 +20,7 @@ namespace Entities
         {
             Balance += Amount;
 
-            Console.WriteLine("You transferred $" + Amount + " money from your Account.\nYou now have a balance of $" + Balance + ".\n");
+            Console.WriteLine("You transferred $" + Amount + " money from your Account.\n");
             return Balance;
         }
         

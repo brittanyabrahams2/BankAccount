@@ -20,31 +20,41 @@ namespace FrontEnd
 
             string end;
 
+            
+                Console.WriteLine("\nWelcome to BCMA Banking App!\n-----------------------" +
+                     "---------------------------------------------------------\nBCMA allows you to manage your bank account easily and efficiently straight" +
+                     " from your console.\n ");
             do
             {
 
-                Console.WriteLine("Welcome to BCMA Banking App!\n-----------------------" +
-                     "---------------------------------------------------------\nBCMA allows you to manage your bank account easily and efficiently straight" +
-                     " from your console.\n ");
-
-                Console.WriteLine("What would you like to do?\n (1)Register\n (2)Open Account\n (3)Close Account\n" +
-                    " (4)Deposit\n (5)Withdraw\n (6)Transfer\n (7) Display list of accounts\n (8)Display list of transactions\n " +
-                    "(9)Pay loan installment\n");
+                Console.WriteLine("\nWhich action would you like to perform?\n (1)  Register\n (2)  Open Account\n (3)  Close Account\n" +
+                    " (4)  Deposit\n (5)  Withdraw\n (6)  Transfer\n (7)  Display list of accounts\n (8)  Display list of transactions\n " +
+                    "(9)  Pay loan installment\n");
                 //multiple choice kind of thing
                 var action = Console.ReadLine();
+                Console.WriteLine("--------------------------------");
                 if (action == "1") //register
                 {
 
-                    Console.WriteLine("You have selected the register option\nPlease fill in your information below.");
+                    Console.WriteLine("You have selected the register option\nPlease fill in your information below:\n");
 
                     Console.WriteLine("First name: ");
                     var fname = Console.ReadLine();
+
 
                     Console.WriteLine("Last name: ");
                     var lname = Console.ReadLine();
                     var name = fname + " " + lname;
 
-                    Console.WriteLine("Welcome " + name + "!\nThank you for registering your account with BCMA bank.\n-------------Return to menu" +
+                    //Console.WriteLine("\n");
+
+                    Console.WriteLine("\nUserID: ");
+                    Console.ReadLine();
+
+                    Console.WriteLine("Passcode: ");
+                    Console.ReadLine();
+
+                    Console.WriteLine("\nWelcome " + name + "!\nThank you for registering your account with BCMA bank.\n-------------Return to menu (q)" +
                         "------------");
                     int Id = 100;
                     Customer customer = new Customer()
@@ -58,11 +68,9 @@ namespace FrontEnd
                     {
                         Id = Id++,
                         accountNumber = random.Next(0, 10000)
-                       
+
 
                     };
-                   
-
                     customerList.Add(customer);
                     accountList.Add(account);
                     Id++;
@@ -70,9 +78,9 @@ namespace FrontEnd
                 }
                 else if (action == "2") //open
                 {
-                    //TODO: if i am opening an account how to print to console
-                    Console.WriteLine("What type of account would you like to open?\n (1)Checking account\n" +
-                        " (2)Business account\n (3)Term Deposit\n (4)Loan\n ");
+                    //TODO: validate ID two customers cannot have the same ID
+                    Console.WriteLine("\nWhat type of account would you like to open?\n (1)  Checking account\n" +
+                        " (2)  Business account\n (3)  Term Deposit\n (4)  Loan\n ");
 
                     var account = Console.ReadLine();
                     switch (account)
@@ -88,12 +96,15 @@ namespace FrontEnd
                                 Balance = random.Next(0, 10000),
 
                             };
-                            Console.Write("Your checking account has just been opened\n Id:" + ca.Id + "\nAccount Number: " +
+
+                            Console.Write("\nYour checking account has just been opened\nId:" + ca.Id + "\nAccount Number: " +
                                 ca.accountNumber + " \nAccount Type: " + ca.accountType + "\nStart Balance:  $" + ca.Balance);
                             double AnnualInterest = 0.5; //fixed interest for all checking accounts
                             Console.WriteLine("\nAnnual Percent Yield(APY): " + AnnualInterest + "%");
+
                             accountList.Add(ca);
-                            Console.WriteLine(" \n------------- Return to menu------------");
+                            
+                            Console.WriteLine(" \n------------- Return to menu (q) ------------");
                             break;
 
                         case "2":
@@ -108,10 +119,10 @@ namespace FrontEnd
                             };
                             Console.Write("Your business account has just been opened\nId:" + ba.Id + "\nAccount Number: " + ba.accountNumber
                                 + "\nAccount Type: " + ba.accountType + "\nStart Balance: $" + ba.Balance);
-                            double AnnualInterest2 = 0.6; 
+                            double AnnualInterest2 = 0.6;
                             Console.WriteLine("\nAnnual Percent Yield(APY): " + AnnualInterest2 + "%");
                             accountList.Add(ba);
-                            Console.WriteLine(" \n------------- Return to menu------------");
+                            Console.WriteLine(" \n------------- Return to menu (q) ------------");
                             break;
                         case "3"://term dep
                             Console.WriteLine("Please type in your Customer Id");
@@ -123,12 +134,12 @@ namespace FrontEnd
                                 accountType = "Term Deposit",
                                 Balance = random2.Next(0, 10000),
                             };
-                            Console.Write("Your term deposit account has just been opened\n Id: " +td.Id + "\nAccount Number: " +
-                                td.accountNumber + " \nAccount Type: " + td.accountType + "\nStart Balance: $" );
+                            Console.Write("Your term deposit account has just been opened\n Id: " + td.Id + "\nAccount Number: " +
+                                td.accountNumber + " \nAccount Type: " + td.accountType + "\nStart Balance: $");
                             double AnnualInterest3 = 0.6;
                             Console.WriteLine("\nAnnual Percent Yield(APY): " + AnnualInterest3 + "%");
                             accountList.Add(td);
-                            Console.WriteLine(" \n------------- Return to menu------------");
+                            Console.WriteLine(" \n------------- Return to menu (q) ------------");
                             break;
                         case "4"://loan
                             Console.WriteLine("Please type in your Customer Id");
@@ -139,10 +150,11 @@ namespace FrontEnd
                                 accountNumber = random4.Next(0, 10000),
                                 accountType = "Loan",
                             };
+                            l.Balance = random4.Next(0, 10000);
                             Console.Write("Your loan has just been opened\n Id:" + l.Id + "\nAccount Number: " +
                                 l.accountNumber + " \nAccount Type: " + l.accountType + "\nStart Balance: $" + l.Balance);
                             accountList.Add(l);
-                            Console.WriteLine(" \n------------- Return to menu------------");
+                            Console.WriteLine(" \n------------- Return to menu (q) ------------");
                             break;
                         default:
                             Console.WriteLine("WARNING: No further action can be performed.\n Press q to " +
@@ -174,7 +186,8 @@ namespace FrontEnd
                             };
                             Console.Write("Your checking account has been closed:\n Id:" + ca.Id + "\nAccount Number: "
                                 + ca.accountNumber + "\nAccount Type: " + ca.accountType);
-                            Console.WriteLine(" \n------------- Return to menu------------");
+                           
+                            Console.WriteLine(" \n------------- Return to menu (q) ------------");
                             break;
 
                         case "2"://business account
@@ -190,7 +203,7 @@ namespace FrontEnd
 
                             Console.Write("Your business account has been closed:\n Id:" + ba.Id + "\nAccount Number: "
                                 + ba.accountNumber + "\nAccount Type: " + ba.accountType);
-                            Console.WriteLine(" \n------------- Return to menu------------");
+                            Console.WriteLine(" \n------------- Return to menu(q) ------------");
                             break;
 
                         default:
@@ -200,23 +213,38 @@ namespace FrontEnd
                     }
                 }
                 else if (action == "4") //deposit
-                {
+                {   //TODO: Based on account number when you paste the number you should deposit into that specific account
+                    //need a transaction list for each customer
                     Console.WriteLine("Which account would you like to deposit money into?\n (1)Checking account\n (2)Business account\n (3) Term Despoit\n ");
                     var account = Console.ReadLine();
                     switch (account)
                     {
                         case "1":
                             CheckingAccount ca = new CheckingAccount();
-                            Console.WriteLine("Please enter your Customer ID:\n");
-                            ca.Id = Int32.Parse(Console.ReadLine());
-                            Random random = new Random();
-                            ca.accountNumber = random.Next(0, 10000);
-                            Console.WriteLine("Your account number: " + ca.accountNumber);
+                            Console.WriteLine("Please enter your account number:\n");
+                            ca.accountNumber = Int32.Parse(Console.ReadLine());
+                            //Random random = new Random();
+                            //ca.accountNumber = random.Next(0, 10000);
+                            //Console.WriteLine("Your account number: " + ca.accountNumber);
                             ca.accountType = "Checking";
                             Console.WriteLine("How much would you like to deposit?");
                             ca.Balance = ca.Deposit(Convert.ToDouble(Console.ReadLine()));
+                           // double amount = ca.Balance + l.Balance;
+                            Console.WriteLine($"Id: {ca.Id}\nAccount Number: {ca.accountNumber}\n" +
+                                $"Account type: {ca.accountType}\nBalance: ${ca.Balance}");
+
+                            // transactionList.Add(ca.Balance);
+
+                            //foreach (Account item in accountList)
+                            //{
+                            //    if (ca.accountNumber == item.accountNumber)
+                            //    {
+                            //        Console.WriteLine("cno");
+                            //        item.Balance += ca.Balance;
+                            //    }
+                            //}
                             transactionList.Add(ca.Balance);
-                            Console.WriteLine(" \n------------- Return to menu------------");
+                            Console.WriteLine(" \n------------- Return to menu (q) ------------");
                             break;
                         case "2":
                             BusinessAccount ba = new BusinessAccount();
@@ -228,8 +256,10 @@ namespace FrontEnd
                             ba.accountType = "Checking";
                             Console.WriteLine("How much would you like to deposit?");
                             ba.Balance = ba.Deposit(Convert.ToDouble(Console.ReadLine()));
+                            Console.WriteLine($"Id: {ba.Id}\nAccount Number: {ba.accountNumber}\n" +
+                               $"Account type: {ba.accountType}\nBalance: ${ba.Balance}");
                             transactionList.Add(ba.Balance);
-                            Console.WriteLine(" \n------------- Return to menu------------");
+                            Console.WriteLine(" \n------------- Return to menu (q) ------------");
                             break;
 
                         case "3":
@@ -242,13 +272,15 @@ namespace FrontEnd
                             td.accountType = "Checking";
                             Console.WriteLine("How much would you like to deposit?");
                             td.Balance = td.Deposit(Convert.ToDouble(Console.ReadLine()));
+                            Console.WriteLine($"Id: {td.Id}\nAccount Number: {td.accountNumber}\n" +
+                               $"Account type: {td.accountType}\nBalance: ${td.Balance}");
                             transactionList.Add(td.Balance);
-                            Console.WriteLine(" \n------------- Return to menu------------");
+                            Console.WriteLine(" \n------------- Return to menu (q) ------------");
                             break;
                         default:
                             Console.WriteLine("WARNING: No further action can be performed.\n Press q to " +
                                 "return back to the main menu...");
-    
+
                             break;
                     }
                 }
@@ -271,8 +303,10 @@ namespace FrontEnd
                             Console.WriteLine("How much would you like to withdraw?");
                             ca.Balance = ca.Withdraw(Convert.ToDouble(Console.ReadLine()));
                             Console.WriteLine(ca.Balance);
+                            Console.WriteLine($"Id: {ca.Id}\nAccount Number: {ca.accountNumber}\n" +
+                               $"Account type: {ca.accountType}\nBalance: ${ca.Balance}");
                             transactionList.Add(ca.Balance);
-                            Console.WriteLine(" \n------------- Return to menu------------");
+                            Console.WriteLine(" \n------------- Return to menu (q) ------------");
                             break;
 
                         case "2": //business
@@ -291,8 +325,10 @@ namespace FrontEnd
                             ba.Balance = ba.Withdraw(Convert.ToDouble(Console.ReadLine()));
 
                             Console.WriteLine(ba.Balance);
+                            Console.WriteLine($"Id: {ba.Id}\nAccount Number: {ba.accountNumber}\n" +
+                               $"Account type: {ba.accountType}\nBalance: ${ba.Balance}");
                             transactionList.Add(ba.Balance);
-                            Console.WriteLine(" \n------------- Return to menu------------");
+                            Console.WriteLine(" \n------------- Return to menu (q) ------------");
                             break;
                         case "3": //term deposit
                             TermDeposit td = new TermDeposit();
@@ -305,8 +341,10 @@ namespace FrontEnd
                             Console.WriteLine("How much would you like to withdraw?");
                             td.Balance = td.Withdraw(Convert.ToDouble(Console.ReadLine()));
                             Console.WriteLine(td.Balance);
+                            Console.WriteLine($"Id: {td.Id}\nAccount Number: {td.accountNumber}\n" +
+                               $"Account type: {td.accountType}\nBalance: ${td.Balance}");
                             transactionList.Add(td.Balance);
-                            Console.WriteLine(" \n------------- Return to menu------------");
+                            Console.WriteLine(" \n------------- Return to menu (q) ------------");
                             break;
                         default:
                             Console.WriteLine("WARNING: No further action can be performed.\n Press q to " +
@@ -331,13 +369,13 @@ namespace FrontEnd
                             Console.WriteLine("How much would you like to transfer?");
                             var transfer = Console.ReadLine();
 
-                            Console.WriteLine("How much would you like to transfer?");
+
                             CheckingAccount ca = new CheckingAccount();
                             Transfer t = new Transfer();
                             double amount = ca.Withdraw(Int32.Parse(transfer));
                             transactionList.Add(amount);
                             Console.WriteLine("transfer to business complete");
-                            Console.WriteLine(" \n------------- Return to menu------------");
+                            Console.WriteLine(" \n------------- Return to menu (q) ------------");
                             break;
 
                         case "2":
@@ -351,7 +389,7 @@ namespace FrontEnd
                             double amount1 = ba.Withdraw(Int32.Parse(transfer1));
                             transactionList.Add(amount1);
                             Console.WriteLine("transfer to business complete");
-                            Console.WriteLine(" \n------------- Return to menu------------");
+                            Console.WriteLine(" \n------------- Return to menu (q) ------------");
                             break;
 
                         default:
@@ -366,15 +404,24 @@ namespace FrontEnd
 
                     foreach (Account item in accountList)
                     {
-                        Console.WriteLine($"Id: {item.Id} - Account Number: {item.accountNumber} - Account type: {item.accountType}");
+                        Console.WriteLine($"Id: {item.Id}\nAccount Number: {item.accountNumber}\n" +
+                            $"Account type: {item.accountType}");
+                        Console.WriteLine("-----------------------------");
                     }
 
                 }
                 else if (action == "8")//display transactions
                 {
+                    //TODO: need to figure out how to print the acct number and transaction
+                   
                     foreach (double item in transactionList)
                     {
-                        Console.WriteLine($"Transaction history: " + item);
+                        Console.WriteLine("What is your account number?");
+                        var trans = Console.ReadLine();
+                        Console.WriteLine($"\nAccount Number: {trans}");
+                        Console.WriteLine($"Transaction history: $" + item);
+                        Console.WriteLine("-----------------------------");
+
                     }
                 }
                 else if (action == "9") //pay loan
@@ -396,7 +443,7 @@ namespace FrontEnd
 
                         double deduction = ca.Withdraw(loan.PayLoan(Convert.ToDouble(Console.ReadLine())));
                         transactionList.Add(deduction);
-                        Console.WriteLine(" \n------------- Return to menu------------");
+                        Console.WriteLine(" \n------------- Return to menu (q) ------------");
                     }
                     else if (pay == "2") //business
                     {
@@ -413,7 +460,7 @@ namespace FrontEnd
 
                         double deduction = ba.Withdraw(loan.PayLoan(Convert.ToDouble(Console.ReadLine())));
                         transactionList.Add(deduction);
-                        Console.WriteLine(" \n------------- Return to menu------------");
+                        Console.WriteLine(" \n------------- Return to menu (q) ------------");
                     }
 
                 }
@@ -428,11 +475,10 @@ namespace FrontEnd
             } while (end == "q");
 
 
-          
-            
 
-        } 
+
+
+        }
 
     }
 }
-

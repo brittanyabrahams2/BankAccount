@@ -15,7 +15,7 @@ namespace Entities
         {
             Balance += Amount;
 
-            Console.WriteLine("You have deposited $" + Amount + " into your Business Account.\nYou now have a balance of $" + Balance + ".\n");
+            Console.WriteLine("You have deposited $" + Amount + " into your Business Account.\n");
             return Balance;
         }
 
@@ -28,7 +28,7 @@ namespace Entities
             if (Balance < 0)
             {
                 Console.WriteLine("WARNING:Overdraft!\n");
-
+                
                 //overdraft fee interest (one time fee)
                 Balance = (-1 * Balance * OverDraftInterest / 100) + 0 - Balance;
                 Console.WriteLine("You have just withdrawn $" + Amount + " out of your Business account.\nYou owe $" +
@@ -38,7 +38,7 @@ namespace Entities
             else
             {
                 //remember (Total = Total - Amount)
-                Console.WriteLine("You have just withdrawn $" + Amount + " out of your Business account. Your have a balance of $" + Balance);
+                Console.WriteLine("You have just withdrawn $" + Amount + " out of your Business account.");
             }
             return Balance;
         }

@@ -15,7 +15,7 @@ namespace Entities
 
             Balance += Amount;
 
-            Console.WriteLine("You have deposited $ " + Amount + "into your Checking Account.\nYou now have a balane of $" + Balance + ".\n");
+            Console.WriteLine("You have successfully deposited $ " + Amount + " into your Checking Account.\n");
             return Balance;
         }
 
@@ -33,7 +33,7 @@ namespace Entities
             else
             {
                 //treat remaining as normal withdraw
-                Console.WriteLine("You have just withdrawn $" + Amount + " out of your Checking account.\nYour balance is now $" + Balance);
+                Console.WriteLine("You have just withdrawn $" + Amount );
             }
             return Balance;
         }
